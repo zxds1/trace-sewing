@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: medusa
+      POSTGRES_PASSWORD: medusa
+      POSTGRES_DB: medusa
+    volumes:
+      - medusa_postgres_data:/var/lib/postgresql/data
+    networks:
+      - medusa
+
+  redis:
+    image: redis:7
+    restart: always
+    networks:
+      - medusa
+
+  medusa:
+    image: medusajs/medusa:latest
+    restart: always
+    environment:
+      - MEDUSA_DB_TYPE=postgres
+      - MEDUSA_DB_URL=postgres://medusa:medusa@postgres:5432/medusa
+      - MEDUSA_REDIS_URL=redis://redis:6379
+      - MEDUSA_MIGRATE=1
+      - NODE_ENV=development
+      - MEDUSA_JWT_SECRET=supersecret
+      - PORT=9000
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - medusa
+
+  medusa-admin:
+    image: medusajs/admin:latest
+    restart: always
+    environment:
+      - NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://medusa:9000
+      - REACT_APP_MEDUSA_BACKEND_URL=http://medusa:9000
+      - NEXT_PUBLIC_VERCEL_ENV=development
+    ports:
+      - "7000:7000"
+    depends_on:
+      - medusa
+    networks:
+      - medusa
+
+volumes:
+  medusa_postgres_data:
+
+networks:
+  medusa:
+    driver: bridge
