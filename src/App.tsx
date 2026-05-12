@@ -22,13 +22,15 @@ import Checkout from './pages/Checkout';
 import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 import OrderTracking from './pages/OrderTracking';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 export default function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen font-sans selection:bg-zinc-950 selection:text-white">
         <Navbar />
-        <main className="flex-grow pt-16 md:pt-20">
+        <main className="flex-grow pt-20 md:pt-24">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
@@ -40,6 +42,8 @@ export default function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/track-order" element={<OrderTracking />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

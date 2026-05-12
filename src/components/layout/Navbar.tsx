@@ -4,24 +4,15 @@
  */
 
 import { Link, NavLink } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Search, Phone } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { ShoppingCart, Menu, X, Search, Phone, User, Package } from 'lucide-react';
+import { useState } from 'react';
 import { useCart } from '@/CartContext';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { totalItems } = useCart();
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -32,76 +23,104 @@ export default function Navbar() {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const { totalItems } = useCart();
-
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
-        isScrolled 
-          ? 'bg-white/80 backdrop-blur-md border-zinc-200 py-3 shadow-sm' 
-          : 'bg-transparent border-transparent py-5'
+        'fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-b-3xl',
+        'bg-white/60 backdrop-blur-md shadow-sm'
       )}
+      style={{
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        boxShadow: '0 2px 16px rgba(0, 83, 158, 0.1)',
+        color: 'rgb(15, 23, 42)',
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        justifyContent: 'space-between',
+        lineHeight: '24px',
+        marginTop: '0',
+        maxWidth: '1240px',
+        paddingBottom: '12px',
+        paddingLeft: '0',
+        paddingRight: '0',
+        paddingTop: '0',
+        position: 'fixed',
+        top: '0',
+        transitionDuration: '0.3s',
+        transitionProperty: 'all',
+        transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        width: 'calc(100% - 32px)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="bg-zinc-950 text-white w-8 h-8 flex items-center justify-center font-bold text-xl tracking-tighter">T</div>
-            <span className="text-xl font-bold tracking-tight font-sans text-zinc-900 group-hover:text-zinc-600 transition-colors">
-              TRACE SEWING
-            </span>
+      {/* Delivery Bar (Top) */}
+      <div className="w-full bg-[#00539E]/90 text-white text-[10px] py-1">
+        <div className="max-w-[1240px] mx-auto px-4 flex justify-between items-center">
+          <Link to="/track-order" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+            <Package size={12} />
+            <span>Track Order</span>
           </Link>
+          <span className="hidden md:inline-flex items-center gap-1">
+            📞 +256 (414) 123-456
+          </span>
+        </div>
+      </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.href}
-                className={({ isActive }) =>
-                  cn(
-                    'text-sm font-medium tracking-wide uppercase transition-colors hover:text-zinc-900',
-                    isActive ? 'text-zinc-900' : 'text-zinc-500'
-                  )
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </div>
-
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="p-2 text-zinc-500 hover:text-zinc-900 transition-colors">
-              <Search size={20} />
-            </button>
-            <Link to="/cart" className="p-2 text-zinc-500 hover:text-zinc-900 transition-colors relative">
-              <ShoppingCart size={20} />
-              <span className="absolute top-0 right-0 bg-zinc-950 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
-                {totalItems}
-              </span>
-            </Link>
-            <Button variant="outline" className="rounded-none border-zinc-950 px-6 font-semibold uppercase text-xs tracking-widest hover:bg-zinc-950 hover:text-white transition-all">
-              Request Quote
-            </Button>
-          </div>
-
+      {/* Main Navbar Content */}
+      <div className="w-full flex items-center justify-between px-4">
+        {/* Left: Menu and Logo */}
+        <div className="flex items-center space-x-3">
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center space-x-4">
-            <Link to="/cart" className="p-2 text-zinc-500 relative">
-              <ShoppingCart size={20} />
-              <span className="absolute top-0 right-0 bg-zinc-950 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
-                {totalItems}
-              </span>
-            </Link>
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-zinc-900"
+              className="p-1.5 text-[#00539E] hover:text-[#004080] transition-colors"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
+          
+          {/* Logo - Just "J" */}
+          <Link to="/" className="flex items-center group">
+            <div className="bg-[#00539E] text-white w-7 h-7 flex items-center justify-center font-bold text-sm tracking-tighter rounded-lg shadow-sm group-hover:bg-[#004080] transition-colors">J</div>
+          </Link>
+        </div>
+
+        {/* Center: Desktop Nav (hidden on mobile) */}
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.href}
+              className={({ isActive }) =>
+                cn(
+                  'text-xs font-medium tracking-wide uppercase transition-colors hover:text-[#00539E] whitespace-nowrap',
+                  isActive ? 'text-[#00539E]' : 'text-slate-600'
+                )
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
+        </div>
+
+        {/* Right: Search, Cart, Profile */}
+        <div className="flex items-center space-x-1">
+          <button className="p-1.5 text-slate-500 hover:text-[#00539E] transition-colors">
+            <Search size={16} />
+          </button>
+          <Link to="/cart" className="p-1.5 text-slate-500 hover:text-[#00539E] transition-colors relative">
+            <ShoppingCart size={16} />
+            <span className="absolute top-0 right-0 bg-[#00539E] text-white text-[8px] w-3 h-3 rounded-full flex items-center justify-center">
+              {totalItems}
+            </span>
+          </Link>
+          <Link to="/profile" className="p-1.5 text-slate-500 hover:text-[#00539E] transition-colors">
+            <User size={16} />
+          </Link>
         </div>
       </div>
 
@@ -112,25 +131,25 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white border-b border-zinc-200 md:hidden overflow-hidden"
+            className="absolute top-full left-0 right-0 bg-white md:hidden overflow-hidden shadow-lg rounded-b-3xl"
           >
-            <div className="px-4 pt-4 pb-8 space-y-4">
+            <div className="px-4 pt-4 pb-6 space-y-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-lg font-medium text-zinc-900 py-2 border-b border-zinc-100"
+                  className="block text-base font-medium text-slate-800 py-2 border-b border-sky-50 hover:text-[#00539E] transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 space-y-4">
-                <Button className="w-full rounded-none bg-zinc-950 h-12 uppercase tracking-widest text-xs">
+              <div className="pt-3 space-y-3">
+                <button className="w-full rounded-none bg-[#00539E] h-10 uppercase tracking-widest text-xs text-white hover:bg-[#004080] transition-colors">
                   Request Quote
-                </Button>
-                <div className="flex items-center justify-center space-x-2 text-zinc-500 text-sm">
-                  <Phone size={16} />
+                </button>
+                <div className="flex items-center justify-center space-x-2 text-slate-500 text-sm">
+                  <Phone size={14} />
                   <span>Call Us: +1 (234) 567-890</span>
                 </div>
               </div>

@@ -54,27 +54,26 @@ export default function Hero() {
   ];
 
   const marqueePhrases = [
-    'Direct Drive Systems',
-    'Servo Precision',
-    'Commercial Grade Motors',
-    'Industrial Stitch Control',
-    'High-Speed Production',
-    'Automated Tension Systems',
+    'Consisted tension every time',
+    'Thread it once, sew forever',
+    'Elevate your craft',
+    'Outlasts the competition',
+    'The machine tailors dream about',
+    'preferred by top designers',
   ];
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050505] pt-20 px-4 sm:px-6 lg:px-8"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white pt-20 px-4 sm:px-6 lg:px-8"
       id="hero-section"
     >
-      {/* Industrial Grid Background */}
+      {/* Simple clean background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-white" />
       </div>
 
-      {/* Ambient particulate + subtle warm glows for depth (disabled on small screens) */}
+      {/* Ambient decorative circles */}
       {!isMobile && (
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(6)].map((_, i) => (
@@ -92,11 +91,10 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "linear"
               }}
-              className="absolute w-56 h-56 bg-amber-500/6 rounded-full blur-[120px]"
+              className="absolute w-56 h-56 bg-sky-200/20 rounded-full blur-[120px]"
               style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
             />
           ))}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02),transparent_40%)] pointer-events-none" />
         </div>
       )}
 
@@ -109,28 +107,28 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-8 h-[1px] bg-zinc-600/40" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.36em] text-zinc-400">
-                Industrial Sewing Systems
+              <div className="w-8 h-[1px] bg-[#00539E]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.36em] text-slate-600">
+                Premium Industrial Equipment
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl xl:text-7xl font-display font-bold text-white tracking-tight leading-snug">
-              Precision
+            <h1 className="text-4xl md:text-6xl xl:text-7xl font-display font-bold text-[#00539E] tracking-tight leading-snug">
+              JUKI
               <br />
-              <span className="text-zinc-400">Machines</span> built for
+              <span className="text-slate-600">Sewing Machines</span>
               <br />
               <span className="relative inline-block">
-                serious
+                Built for
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
                   transition={{ duration: 1, delay: 1 }}
-                  className="absolute bottom-1 left-0 h-0.5 bg-amber-400/25 -z-10 w-full" 
+                  className="absolute bottom-1 left-0 h-0.5 bg-sky-300 -z-10 w-full" 
                 />
               </span>
               <br />
-              production
+              Professionals
             </h1>
           </motion.div>
 
@@ -138,9 +136,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-zinc-400 text-base md:text-lg max-w-lg leading-relaxed font-light"
+            className="text-slate-600 text-base md:text-lg max-w-lg leading-relaxed font-light"
           >
-            From fashion studios to industrial workshops, TRACE Sewing delivers high-performance machines engineered for speed, reliability, and commercial-grade output.
+            High-performance industrial and professional sewing machines engineered for precision, speed, and reliability. From fashion studios to large-scale manufacturing.
           </motion.p>
 
           <motion.div
@@ -151,20 +149,13 @@ export default function Hero() {
           >
             <Button 
               asChild 
-              className="group relative h-14 px-10 bg-white text-black hover:bg-zinc-200 rounded-none transition-all duration-300 font-bold tracking-wider text-[11px] overflow-hidden"
+              className="group relative h-14 px-10 bg-[#00539E] text-white hover:bg-[#004080] rounded-none transition-all duration-300 font-bold tracking-wider text-[11px] overflow-hidden shadow-lg"
             >
               <Link to="/catalog">
                 <span className="relative z-10 flex items-center">
                   Shop Machines <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              className="h-14 px-10 border-zinc-800 text-white hover:bg-white hover:text-black rounded-none transition-all duration-300 font-bold tracking-wider text-[11px]"
-            >
-              <Link to="/contact">Request Quote</Link>
             </Button>
           </motion.div>
 
@@ -180,8 +171,8 @@ export default function Hero() {
               { label: "Nationwide Delivery", icon: <Server size={10} /> },
               { label: "Certified Support", icon: <Shield size={10} /> },
             ].map((item, i) => (
-              <div key={i} className="flex items-center space-x-2 text-zinc-500">
-                <span className="text-amber-400">{item.icon}</span>
+              <div key={i} className="flex items-center space-x-2 text-slate-600">
+                <span className="text-[#00539E]">{item.icon}</span>
                 <span className="text-[9px] font-bold uppercase tracking-widest">{item.label}</span>
               </div>
             ))}
@@ -195,30 +186,23 @@ export default function Hero() {
             className="relative z-20 w-full max-w-[600px] aspect-square"
           >
             {/* Spotlight backdrop */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02),transparent_30%)] rounded-full blur-[120px] -z-10" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,83,158,0.1),transparent_30%)] rounded-full blur-[120px] -z-10" />
             
-            {/* The Machine Image */}
+            {/* The Machine Image - White background container */}
               <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="relative w-full h-full"
             >
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full bg-white rounded-2xl shadow-xl border border-sky-100 p-8 flex items-center justify-center">
                 <img
                   src="/assets/hero-machine.svg"
-                  alt="TRACE Industrial Sewing Machine"
+                  alt="JUKI Industrial Sewing Machine"
                   className="w-full h-full object-contain"
                   loading={isMobile ? 'lazy' : 'eager'}
                   decoding="async"
                 />
-
-                {/* Metallic reflection sweep (hide on mobile for perf) */}
-                {!isMobile && (
-                  <div className="absolute inset-0 pointer-events-none metal-sweep opacity-70 mix-blend-screen" />
-                )}
-                {/* Soft foreground shadow plane */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-6 bg-gradient-to-t from-black/40 to-transparent blur-[20px] -z-10 rounded-full" />
               </div>
 
               {/* Floating Stat Cards */}
@@ -229,14 +213,14 @@ export default function Hero() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: stat.delay, duration: 0.6 }}
                   className={cn(
-                    "absolute backdrop-blur-sm bg-zinc-900/60 border border-zinc-700/40 p-3 rounded-md shadow-xl hidden md:flex items-center space-x-3 transition-colors cursor-default",
+                    "absolute backdrop-blur-sm bg-white border border-sky-200 p-3 rounded-md shadow-xl hidden md:flex items-center space-x-3 transition-colors cursor-default",
                     i === 0 ? "top-12 left-6" : i === 1 ? "bottom-20 right-6" : "top-1/2 right-6 -translate-y-1/2"
                   )}
                 >
-                  <div className="w-8 h-8 rounded-full bg-amber-400/10 flex items-center justify-center text-amber-400 transition-transform">
+                  <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-[#00539E] transition-transform">
                     {stat.icon}
                   </div>
-                  <span className="text-[10px] font-medium uppercase tracking-widest text-white whitespace-nowrap max-w-xs">
+                  <span className="text-[10px] font-medium uppercase tracking-widest text-slate-700 whitespace-nowrap max-w-xs">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -245,16 +229,16 @@ export default function Hero() {
           </motion.div>
 
           {/* Machine shadow/glow on floor */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-gradient-to-t from-black/30 to-transparent blur-[40px] rounded-[100%]" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-gradient-to-t from-sky-100/50 to-transparent blur-[40px] rounded-[100%]" />
         </div>
       </div>
 
       {/* Marquee Footer */}
-      <div className="absolute bottom-0 left-0 w-full h-16 border-t border-white/5 flex items-center overflow-hidden bg-white/[0.02] backdrop-blur-sm z-20">
+      <div className="absolute bottom-0 left-0 w-full h-16 border-t border-sky-100 flex items-center overflow-hidden bg-[#00539E] backdrop-blur-sm z-20">
         <div className="flex animate-marquee whitespace-nowrap">
           {Array.from({length: 10}).map((_, idx) => (
             <div key={idx} className="flex items-center px-8">
-              <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-zinc-500">
+              <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-white/80">
                 {marqueePhrases[idx % marqueePhrases.length]} •
               </span>
             </div>
@@ -265,11 +249,11 @@ export default function Hero() {
       {/* Live Indicator */}
       <div className="absolute top-32 right-12 hidden xl:flex items-center space-x-3 z-30">
         <div className="relative">
-          <div className="w-2 h-2 bg-red-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-2 bg-red-500 rounded-full animate-ping" />
+          <div className="w-2 h-2 bg-[#00539E] rounded-full" />
+          <div className="absolute inset-0 w-2 h-2 bg-[#00539E] rounded-full animate-ping" />
         </div>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-          <span className="text-white">12</span> Technicians Active
+        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">
+          <span className="text-[#00539E]">12</span> Technicians Active
         </span>
       </div>
 
@@ -278,8 +262,8 @@ export default function Hero() {
         style={{ opacity }}
         className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 z-20"
       >
-        <div className="w-[1px] h-12 bg-gradient-to-b from-zinc-500/40 to-transparent" />
-        <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-zinc-500 rotate-90 origin-left ml-1 translate-y-4">
+        <div className="w-[1px] h-12 bg-gradient-to-b from-sky-300/40 to-transparent" />
+        <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-slate-500 rotate-90 origin-left ml-1 translate-y-4">
           Scroll
         </span>
       </motion.div>
